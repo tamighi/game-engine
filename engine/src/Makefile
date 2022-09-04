@@ -6,9 +6,8 @@ BINDIR = ../../bin/Debug-x64/engine/
 
 LIBENG = $(BINDIR)engine.a
 
-VPATH = test
-SRC =	test.cpp  \
-		test2.cpp
+VPATH = engine
+SRC =	
 
 OBJ = $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
 

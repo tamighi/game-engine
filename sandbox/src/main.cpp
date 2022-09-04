@@ -1,9 +1,5 @@
-namespace engine {
-    void Print();
-    void Print2();
-}
+#include <iostream>
 
 int main(void) {
-    engine::Print();
-    engine::Print2();
+    std::cout << "Hello engine\n";
 }
