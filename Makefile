@@ -4,23 +4,27 @@ export CALLED_FROM_TOP
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
 
-OBJDIR = bin-int/sandbox/
+OBJDIR = bin-int/
 BINDIR = bin/Debug-x64/
 
 LIBENG = $(BINDIR)engine/engine.a
 LIBSDBOX = $(BINDIR)sandbox/sandbox.a
 EXEC = exec
 
-all:
+all: $(OBJDIR) $(BINDIR)
 	cd engine/src; make
 	cd sandbox/src; make
 	$(CC) $(CFLAGS) $(LIBSDBOX) $(LIBENG) -o $(EXEC)
 
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(BINDIR):
+	mkdir -p $(BINDIR)
+
 clean:
-	cd engine/src; make clean
-	cd sandbox/src; make clean
+	rm -rf bin
 	rm -f $(EXEC)
 
-fclean:
-	cd engine/src; make fclean
-	cd sandbox/src; make fclean
+fclean: clean
+	rm -rf $(OBJDIR)

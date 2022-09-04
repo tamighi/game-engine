@@ -2,9 +2,9 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror
 
 OBJDIR = ../../bin-int/sandbox/
-BINDIR = ../../bin/Debug-x64/
+BINDIR = ../../bin/Debug-x64/sandbox/
 
-LIBSDBOX = $(BINDIR)sandbox/sandbox.a
+LIBSDBOX = $(BINDIR)sandbox.a
 
 VPATH = 
 SRC = main.cpp
@@ -14,11 +14,17 @@ OBJ = $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
 $(OBJDIR)%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(OBJ)
+all: $(OBJDIR) $(BINDIR) $(OBJ)
 	ar rcs $(LIBSDBOX) $(OBJ)
 
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(BINDIR):
+	mkdir -p $(BINDIR)
+
 clean: 
-	rm -f $(LIBSDBOX)
+	rm -rf $(BINDIR)
 
 fclean: clean
-	rm -f $(OBJ)
+	rm -rf $(OBJDIR)
