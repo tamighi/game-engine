@@ -6,7 +6,7 @@ namespace engine {
 
     public:
         Application();
-        ~Application();
+         virtual ~Application();
 
         void run();      
     };

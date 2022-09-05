@@ -12,8 +12,8 @@ LIBSDBOX = $(BINDIR)sandbox/sandbox.a
 EXEC = exec
 
 all: $(OBJDIR) $(BINDIR)
-	cd engine/src; make
-	cd sandbox/src; make
+	cd engine; make
+	cd sandbox; make
 	$(CC) $(CFLAGS) $(LIBSDBOX) $(LIBENG) -o $(EXEC)
 
 $(OBJDIR):

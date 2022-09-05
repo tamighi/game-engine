@@ -1,18 +1,20 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror
 
-OBJDIR = ../../bin-int/engine/
-BINDIR = ../../bin/Debug-x64/engine/
+OBJDIR = ../bin-int/engine/
+BINDIR = ../bin/Debug-x64/engine/
+SRCDIR = src/
 
 LIBENG = $(BINDIR)engine.a
 
-VPATH = engine
-SRC =	
+VPATH = $(SRCDIR) $(SRCDIR)engine
+
+SRC = Application.cpp
 
 OBJ = $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
 
 
-$(OBJDIR)%.o: %.cpp
+$(OBJDIR)%.o: %.cpp %.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(OBJDIR) $(BINDIR) $(OBJ)
