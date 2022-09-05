@@ -11,10 +11,16 @@ LIBENG = $(BINDIR)engine/engine.a
 LIBSDBOX = $(BINDIR)sandbox/sandbox.a
 EXEC = exec
 
-all: $(OBJDIR) $(BINDIR)
-	cd engine; make
-	cd sandbox; make
+all: $(EXEC)
+
+$(EXEC): $(OBJDIR) $(BINDIR) $(LIBENG) $(LIBSDBOX)
 	$(CC) $(CFLAGS) $(LIBSDBOX) $(LIBENG) -o $(EXEC)
+
+$(LIBENG): force_look
+	make -C engine/
+
+$(LIBSDBOX): force_look
+	make -C sandbox/
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -28,3 +34,6 @@ clean:
 
 fclean: clean
 	rm -rf $(OBJDIR)
+
+force_look:
+	true

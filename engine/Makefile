@@ -1,5 +1,5 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++11
 
 #	Outdirs
 OBJDIR = ../bin-int/engine/
@@ -10,17 +10,19 @@ VPATH = src/engine/
 SRC=$(foreach d, $(VPATH), $(wildcard $d*.cpp))
 
 #	Include dirs
-INCDIR = vendor/spdlog/include
-INC_PARAMS=$(foreach d, $(INC), -I$d)
+INCDIR = vendor/spdlog/include/ src/engine/
+INC_PARAMS=$(foreach d, $(INCDIR), -I$d)
 
 #	Outfiles
 LIB = $(BINDIR)engine.a
 OBJ = $(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))
 
-$(OBJDIR)%.o: %.cpp %.hpp
+$(OBJDIR)%.o: %.cpp $(INCDIR)*.hpp
 	$(CC) $(CFLAGS) $(INC_PARAMS) -c $< -o $@
 
-all: $(OBJDIR) $(BINDIR) $(OBJ)
+all: $(LIB)
+
+$(LIB): $(OBJDIR) $(BINDIR) $(OBJ)
 	ar rcs $(LIB) $(OBJ)
 
 $(OBJDIR):

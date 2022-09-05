@@ -7,7 +7,8 @@ namespace engine
 
     Application::~Application() {}
 
-    void Application::run() {
+    void Application::run() 
+    {
         while (true);
     }
 

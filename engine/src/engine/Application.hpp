@@ -1,8 +1,10 @@
 #pragma once
 
-namespace engine {
+namespace engine 
+{
 
-    class Application {
+    class Application 
+    {
 
     public:
         Application();

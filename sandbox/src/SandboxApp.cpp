@@ -1,12 +1,14 @@
 #include <iostream>
 #include <engine.hpp>
 
-class Sandbox : public engine::Application {
+class Sandbox : public engine::Application 
+{
 public:
     Sandbox() {}
     ~Sandbox() {}
 };
 
-engine::Application* engine::CreateApplication() {
+engine::Application* engine::CreateApplication() 
+{
     return new Sandbox;
 }
