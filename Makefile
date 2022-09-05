@@ -1,8 +1,10 @@
+## Directory and binaries should be different based on OS
+
 CALLED_FROM_TOP = true
 export CALLED_FROM_TOP
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++17
 
 OBJDIR = bin-int/
 BINDIR = bin/Debug-x64/
@@ -36,4 +38,3 @@ fclean: clean
 	rm -rf $(OBJDIR)
 
 force_look:
-	true
