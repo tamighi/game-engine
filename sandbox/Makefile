@@ -14,16 +14,16 @@ INCDIR = ../engine/vendor/spdlog/include/ ../engine/src/
 INC_PARAMS=$(foreach d, $(INCDIR), -I$d)
 
 #	Outfiles
-LIB = $(BINDIR)sandbox.a
+NAME = $(BINDIR)sandbox.a
 OBJ = $(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))
 
 $(OBJDIR)%.o: %.cpp $(INCDIR)*.hpp
 	$(CC) $(CFLAGS) $(INC_PARAMS) -c $< -o $@
 
-all: $(LIB)
+all: $(NAME)
 
-$(LIB): $(OBJDIR) $(BINDIR) $(OBJ)
-	ar rcs $(LIB) $(OBJ)
+$(NAME): $(OBJDIR) $(BINDIR) $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
