@@ -7,10 +7,6 @@ public:
     ~Sandbox() {}
 };
 
-int main(void) {
-    Sandbox* sandbox = new Sandbox;
-
-    sandbox->run();
-    
-    delete sandbox;
+engine::Application* engine::CreateApplication() {
+    return new Sandbox;
 }
