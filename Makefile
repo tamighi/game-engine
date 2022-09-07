@@ -1,28 +1,22 @@
-## Directory and binaries should be different based on OS
+include top.mk
 
-CALLED_FROM_TOP = true
-export CALLED_FROM_TOP
+OBJDIR = $(BASEOBJDIR)
+BINDIR = $(BASEBINDIR)
 
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++17
-
-OBJDIR = bin-int/
-BINDIR = bin/Debug-x64/
-
-LIBENG = $(BINDIR)engine/engine.a
-LIBSDBOX = $(BINDIR)sandbox/sandbox.a
-NAME = exec
+LIBENG = $(BINDIR)$(ENGINE_DIR)$(ENGINE_LIB)
+LIBSDBOX = $(BINDIR)$(SANDBOX_DIR)$(SANDBOX_LIB)
+NAME = $(EXEC_NAME)
 
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(BINDIR) $(LIBENG) $(LIBSDBOX)
-	$(CC) $(CFLAGS) $(LIBSDBOX) $(LIBENG) -o $(NAME)
+	$(CC) $(LIBSDBOX) $(LIBENG) -o $(NAME)
 
 $(LIBENG): force_look
-	make -C engine/
+	make -C $(ENGINE_DIR)
 
 $(LIBSDBOX): force_look
-	make -C sandbox/
+	make -C $(SANDBOX_DIR)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)

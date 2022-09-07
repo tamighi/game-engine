@@ -1,6 +1,6 @@
 #include "Application.hpp"
 
-namespace engine
+namespace Engine
 {
 
     Application::Application() {}

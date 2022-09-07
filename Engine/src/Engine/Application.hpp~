@@ -1,6 +1,5 @@
 #pragma once
-
-namespace engine 
+namespace Engine 
 {
 
     class Application 
@@ -8,7 +7,7 @@ namespace engine
 
     public:
         Application();
-         virtual ~Application();
+        virtual ~Application();
 
         void run();      
     };

@@ -1,23 +1,22 @@
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++17
+include ../top.mk
 
 #	Outdirs
-OBJDIR = ../bin-int/sandbox/
-BINDIR = ../bin/Debug-x64/sandbox/
+OBJDIR = ../$(BASEOBJDIR)$(ENGINE_DIR)
+BINDIR = ../$(BASEBINDIR)$(ENGINE_DIR)
 
 #	Src dirs !!The name VPATH is important here!!
-VPATH = src/
+VPATH = src/Engine/ 
 SRC=$(foreach d, $(VPATH), $(wildcard $d*.cpp))
 
 #	Include dirs
-INCDIR = ../engine/vendor/spdlog/include/ ../engine/src/
+INCDIR = vendor/spdlog/include/ src/Engine/ 
 INC_PARAMS=$(foreach d, $(INCDIR), -I$d)
 
 #	Outfiles
-NAME = $(BINDIR)sandbox.a
+NAME = $(BINDIR)$(ENGINE_LIB)
 OBJ = $(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))
 
-$(OBJDIR)%.o: %.cpp $(INCDIR)*.hpp
+$(OBJDIR)%.o: %.cpp 
 	$(CC) $(CFLAGS) $(INC_PARAMS) -c $< -o $@
 
 all: $(NAME)
@@ -36,3 +35,6 @@ clean:
 
 fclean: clean
 	rm -rf $(OBJDIR)
+
+-include $(OBJ:%.o=%.d)
+
