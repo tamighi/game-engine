@@ -9,7 +9,7 @@ VPATH = src/Engine/
 SRC=$(foreach d, $(VPATH), $(wildcard $d*.cpp))
 
 #	Include dirs
-INCDIR = vendor/spdlog/include/ src/Engine/ 
+INCDIR = vendor/spdlog/include/ src/
 INC_PARAMS=$(foreach d, $(INCDIR), -I$d)
 
 #	Outfiles
