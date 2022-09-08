@@ -1,12 +1,13 @@
-include ../top.mk
+ROOTDIR = ../
+include $(ROOTDIR)top.mk
 
 #	Outdirs
-OBJDIR = ../$(BASEOBJDIR)$(ENGINE_DIR)
-BINDIR = ../$(BASEBINDIR)$(ENGINE_DIR)
+OBJDIR = $(ROOTDIR)$(BASEOBJDIR)$(ENGINE_DIR)
+BINDIR = $(ROOTDIR)$(BASEBINDIR)$(ENGINE_DIR)
 
-#	Src dirs !!The name VPATH is important here!!
+#	Src dirs
 VPATH = src/Engine/ 
-SRC=$(foreach d, $(VPATH), $(wildcard $d*.cpp))
+SRC = $(foreach d, $(VPATH), $(wildcard $d*.cpp))
 
 #	Precompiled header
 PCH_SRC = src/pch.hpp
@@ -14,10 +15,10 @@ PCH_OUT = src/pch.hpp.gch
 
 #	Include dirs
 INCDIR = vendor/spdlog/include/ src/
-INC_PARAMS=$(foreach d, $(INCDIR), -I$d) -include $(PCH_SRC)
+INC_PARAMS = $(foreach d, $(INCDIR), -I$d) -include $(PCH_SRC)
 
 #	Outfiles
-NAME = $(BINDIR)$(ENGINE_LIB)
+NAME = $(BINDIR)$(ENGINE_NAME)
 OBJ = $(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))
 
 $(OBJDIR)%.o: %.cpp $(PCH_OUT)

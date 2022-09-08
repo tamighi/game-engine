@@ -1,19 +1,20 @@
-include ../top.mk
+ROOTDIR = ../
+include $(ROOTDIR)top.mk
 
 #	Outdirs
-OBJDIR = ../$(BASEOBJDIR)$(SANDBOX_DIR)
-BINDIR = ../$(BASEBINDIR)$(SANDBOX_DIR)
+OBJDIR = $(ROOTDIR)$(BASEOBJDIR)$(SANDBOX_DIR)
+BINDIR = $(ROOTDIR)$(BASEBINDIR)$(SANDBOX_DIR)
 
-#	Src dirs !!The name VPATH is important here!!
+#	Src dirs 
 VPATH = src/
 SRC=$(foreach d, $(VPATH), $(wildcard $d*.cpp))
 
 #	Include dirs
-INCDIR = ../Engine/vendor/spdlog/include/ ../Engine/src/
+INCDIR = $(ROOTDIR)$(ENGINE_DIR)/vendor/spdlog/include/ $(ROOTDIR)$(ENGINE_DIR)src/
 INC_PARAMS=$(foreach d, $(INCDIR), -I$d)
 
 #	Outfiles
-NAME = $(BINDIR)$(SANDBOX_LIB)
+NAME = $(BINDIR)$(SANDBOX_NAME)
 OBJ = $(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))
 
 $(OBJDIR)%.o: %.cpp 

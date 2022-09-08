@@ -3,20 +3,25 @@ include top.mk
 OBJDIR = $(BASEOBJDIR)
 BINDIR = $(BASEBINDIR)
 
-LIBENG = $(BINDIR)$(ENGINE_DIR)$(ENGINE_LIB)
-LIBSDBOX = $(BINDIR)$(SANDBOX_DIR)$(SANDBOX_LIB)
+GLFWLIB = $(BINDIR)$(GLFW_DIR)$(GLFW_NAME)
+ENGLIB = $(BINDIR)$(ENGINE_DIR)$(ENGINE_NAME)
+SDBOXLIB = $(BINDIR)$(SANDBOX_DIR)$(SANDBOX_NAME)
+
 NAME = $(EXEC_NAME)
 
 all: $(NAME)
 
-$(NAME): $(OBJDIR) $(BINDIR) $(LIBENG) $(LIBSDBOX)
-	$(CC) $(LIBSDBOX) $(LIBENG) -o $(NAME)
+$(NAME): $(OBJDIR) $(BINDIR) $(GLFWLIB) $(ENGLIB) $(SDBOXLIB)
+	$(CC) $(GLFWLIB) $(SDBOXLIB) $(ENGLIB) -o $(NAME)
 
-$(LIBENG): force_look
+$(ENGLIB): force_look
 	make -C $(ENGINE_DIR)
 
-$(LIBSDBOX): force_look
+$(SDBOXLIB): force_look
 	make -C $(SANDBOX_DIR)
+
+$(GLFWLIB): force_look
+	make -C $(ENGINE_DIR)vendor/$(GLFW_DIR)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -27,12 +32,14 @@ $(BINDIR):
 clean:
 	make clean -C $(SANDBOX_DIR)
 	make clean -C $(ENGINE_DIR)
+	make clean -C $(ENGINE_DIR)vendor/$(GLFW_DIR)
 	rm -rf bin
 	rm -f $(NAME)
 
 fclean: clean
 	make fclean -C $(SANDBOX_DIR)
 	make fclean -C $(ENGINE_DIR)
+	make fclean -C $(ENGINE_DIR)vendor/$(GLFW_DIR)
 	rm -rf $(OBJDIR)
 
 force_look:
