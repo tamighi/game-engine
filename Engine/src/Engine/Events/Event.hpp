@@ -42,7 +42,7 @@ namespace Engine
 		virtual const char* GetName() const = 0;
 		virtual std::string ToString() const { return GetName(); };
 
-		bool IsInCategory(EventCategory& category)
+		bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;
 		}

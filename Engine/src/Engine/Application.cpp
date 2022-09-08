@@ -10,7 +10,10 @@ namespace Engine
     void Application::run() 
     {
 		KeyPressEvent e(3, true);
-		HZ_TRACE(e);
+		if (e.IsInCategory(EventCategoryInput))
+		{
+			HZ_TRACE(e);
+		}
 
         while (true);
     }
