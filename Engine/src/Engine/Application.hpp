@@ -2,11 +2,10 @@
 
 #include "Engine/Core.hpp"
 #include "Engine/Log.hpp"
-#include "Events/KeyEvent.hpp"
+#include "Engine/Window.hpp"
 
 namespace Engine 
 {
-
     class Application 
     {
 
@@ -15,6 +14,10 @@ namespace Engine
         virtual ~Application();
 
         void run();      
+
+	private:
+		std::unique_ptr<Window> m_Window;
+		bool m_Running = true;
     };
 
     Application* CreateApplication();

@@ -6,7 +6,7 @@ OBJDIR = $(ROOTDIR)$(BASEOBJDIR)$(ENGINE_DIR)
 BINDIR = $(ROOTDIR)$(BASEBINDIR)$(ENGINE_DIR)
 
 #	Src dirs
-VPATH = src/Engine/ 
+VPATH = src/Engine/ src/Platform/Linux/
 SRC = $(foreach d, $(VPATH), $(wildcard $d*.cpp))
 
 #	Precompiled header
@@ -14,7 +14,7 @@ PCH_SRC = src/pch.hpp
 PCH_OUT = src/pch.hpp.gch
 
 #	Include dirs
-INCDIR = vendor/spdlog/include/ src/
+INCDIR = vendor/spdlog/include/ src/ vendor/GLFW/include/
 INC_PARAMS = $(foreach d, $(INCDIR), -I$d) -include $(PCH_SRC)
 
 #	Outfiles

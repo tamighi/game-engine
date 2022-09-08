@@ -4,18 +4,19 @@
 namespace Engine
 {
 
-    Application::Application() {}
+    Application::Application() 
+	{
+		m_Window = std::unique_ptr<Window>(Window::Create());
+	}
 
     Application::~Application() {}
 
     void Application::run() 
     {
-		KeyPressEvent e(3, true);
-		if (e.IsInCategory(EventCategoryInput))
-		{
-			HZ_TRACE(e);
-		}
 
-        while (true);
+        while (m_Running)
+		{
+			m_Window->OnUpdate();
+		}
     }
 }
