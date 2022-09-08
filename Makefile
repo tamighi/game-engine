@@ -25,10 +25,14 @@ $(BINDIR):
 	mkdir -p $(BINDIR)
 
 clean:
+	make clean -C $(SANDBOX_DIR)
+	make clean -C $(ENGINE_DIR)
 	rm -rf bin
 	rm -f $(NAME)
 
 fclean: clean
+	make fclean -C $(SANDBOX_DIR)
+	make fclean -C $(ENGINE_DIR)
 	rm -rf $(OBJDIR)
 
 force_look:

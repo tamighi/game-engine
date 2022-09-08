@@ -17,7 +17,7 @@ NAME = $(BINDIR)$(SANDBOX_LIB)
 OBJ = $(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))
 
 $(OBJDIR)%.o: %.cpp 
-	$(CC) $(CFLAGS) $(INC_PARAMS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DEPFLAGS) $(INC_PARAMS) -c $< -o $@
 
 all: $(NAME)
 

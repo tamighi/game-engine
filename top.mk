@@ -1,5 +1,6 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -MMD -std=c++17
+CFLAGS = -Wall -Wextra -Werror -std=c++17
+DEPFLAGS = -MMD
 BASEOBJDIR = bin-int/
 BASEBINDIR = bin/Debug-x64/
 ENGINE_LIB = Engine.a
