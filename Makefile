@@ -12,7 +12,7 @@ NAME = $(EXEC_NAME)
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(BINDIR) $(GLFWLIB) $(ENGLIB) $(SDBOXLIB)
-	$(CC) $(GLFWLIB) $(SDBOXLIB) $(ENGLIB) -o $(NAME)
+	$(CC) -o $(NAME) $(SDBOXLIB) $(ENGLIB) $(GLFWLIB) 
 
 $(ENGLIB): force_look
 	make -C $(ENGINE_DIR)
