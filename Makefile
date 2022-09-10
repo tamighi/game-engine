@@ -9,7 +9,15 @@ SDBOXLIB = $(BINDIR)$(SANDBOX_DIR)$(SANDBOX_NAME)
 
 NAME = $(EXEC_NAME)
 
-all: $(NAME)
+all: check_os $(NAME)
+
+check_os:
+ifeq ($(detected_OS), Linux)
+	@echo Linux detected.
+else
+	@echo Platform $(detected_OS) not supported.
+	exit 1
+endif
 
 $(NAME): $(OBJDIR) $(BINDIR) $(GLFWLIB) $(ENGLIB) $(SDBOXLIB)
 	$(CC) -o $(NAME) $(SDBOXLIB) $(ENGLIB) $(GLFWLIB) 
