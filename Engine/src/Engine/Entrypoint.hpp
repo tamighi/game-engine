@@ -11,6 +11,6 @@ int main(int argc, char** argv)
     HZ_CORE_WARN("Initialized logger !");
 
     Engine::Application* app = Engine::CreateApplication();
-    app->run();
+    app->Run();
     delete app;
 }

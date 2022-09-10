@@ -21,11 +21,11 @@ namespace Engine
 		int m_KeyCode;
 	};
 
-	class KeyPressEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 
 	public:
-		KeyPressEvent(int keycode, bool isRepeat = false)
+		KeyPressedEvent(int keycode, bool isRepeat = false)
 			: KeyEvent(keycode), m_IsRepeat(isRepeat) {}
 
 		bool IsRepeat() const { return m_IsRepeat; }
@@ -43,17 +43,17 @@ namespace Engine
 		bool m_IsRepeat;
 	};
 
-	class KeyReleaseEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 
 	public:
-		KeyReleaseEvent(int keycode)
+		KeyReleasedEvent(int keycode)
 			: KeyEvent(keycode) {}
 
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyReleaseEvent: " << m_KeyCode;
+			ss << "KeyReleasedEvent: " << m_KeyCode;
 			return ss.str();
 		}
 
