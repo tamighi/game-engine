@@ -26,7 +26,7 @@ $(OBJDIR)%.o: %.cpp $(PCH_OUT)
 
 all: $(NAME)
 
-$(NAME): $(OBJDIR) $(BINDIR) $(OBJ)
+$(NAME): Makefile | $(BINDIR) $(OBJDIR) $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 $(PCH_OUT): $(PCH_SRC)
