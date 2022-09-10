@@ -12,17 +12,18 @@ SRC = $(foreach d, $(VPATH), $(wildcard $d*.cpp))
 #	Precompiled header
 PCH_SRC = src/pch.hpp
 PCH_OUT = src/pch.hpp.gch
+INC_PCH = -include $(PCH_SRC)
 
 #	Include dirs
 INCDIR = vendor/spdlog/include/ src/ vendor/GLFW/include/
-INC_PARAMS = $(foreach d, $(INCDIR), -I$d) -include $(PCH_SRC)
+INC_PARAMS = $(foreach d, $(INCDIR), -I$d)
 
 #	Outfiles
 NAME = $(BINDIR)$(ENGINE_NAME)
 OBJ = $(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))
 
 $(OBJDIR)%.o: %.cpp $(PCH_OUT)
-	$(CC) $(CFLAGS) $(DEPFLAGS) $(INC_PARAMS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DEPFLAGS) $(INC_PARAMS) $(INC_PCH) -c $< -o $@
 
 all: $(NAME)
 
@@ -30,7 +31,7 @@ $(NAME): Makefile | $(BINDIR) $(OBJDIR) $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 $(PCH_OUT): $(PCH_SRC)
-	$(CC) $(CFLAGS) $(DEPFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $(DEPFLAGS) $(INC_PARAMS) $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
